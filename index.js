@@ -273,6 +273,106 @@ export function sum(x, y) {
 }
 
 // Dynamic loading = 'System' is default loader
-System.import("lib/math").then(function(m) {
-  alert("2π = " + m.sum())
+System.import("lib/math").then(function (m) {
+  alert("2π = " + m.sum(m.pi, m.pi))
 })
+
+// Create execution sandboxes - new loadr
+
+var loader = new loader({
+  global: fixup(window) // replace 'console.log'
+})
+loader.eval("console.log(\"hello world!\")")
+
+// Directly manipulate module cache
+
+System.get("jquery")
+System.set("jquery", Modul({
+  $: $
+})) // Warning: not yet finalized
+
+// Map + Set + WeakMap + WeakSet
+
+// Set
+var s = new Set()
+s.add("hello").add("goodbye").add("hello")
+s.size === 2
+s.has("hello") === true
+
+// Maps
+var m = new Map()
+m.set("hello", 42)
+m.set(s, 34)
+
+// Weak Maps
+var wm = new WeajMap()
+wm.set(s, {
+  extra: 42
+})
+wm.size === undefined
+
+// Weak Sets
+var ws = new WeakSet()
+ws.add({
+  data: 42
+})
+// Because the added object has no other references, it will not be held in the set
+
+// Proxying a normal object
+var target = {}
+var handler = {
+  get: function (receiver, name) {
+    return `Hello, ${name}!`
+  }
+}
+
+var p = new Proxy(target, handler)
+p.world === "Hello, world!"
+
+// Proxying a function object
+
+var target = function () {
+  return "I am the target"
+}
+var handler = {
+  apply: function (receiver, ...args) {
+    return " I am the proxy"
+  }
+}
+
+var p = new Proxy(target, handler)
+p() === "I am the proxy"
+
+// There are traps available for all of the runtime-level meta-operations:
+
+var handler = {
+  // target.prop
+  get: ...,
+  // target.prop = value
+  set: ...,
+  // 'prop' in target
+  has: ...,
+  // delete target.prop
+  deleteProperty: ...,
+  // target(...args)
+  apply: ...,
+  // new target(...args)
+  construct: ...,
+  Object.getOwnPropertyDescriptor(target, 'prop')
+  getOwnPropertyDescriptor: ...,
+  // Object.defineProperty(target,'prop', descriptor)
+  defineProperty: ...,
+  // Object.getPrototypeOf(target), Reflect.getPrototypeOf(target),
+  // target.__proto__, object.isPrototypeOf(target), object instanceof target
+  getPrototypeOf: ...,
+  // Object.setPrototypeOf(target), Reflect.setPrototypeOf(target)
+  setPrototypeOf: ...,
+  // for (let i in target) {}
+  enumerate: ...,
+  // Object.keys(target)
+  ownKeys: ...,
+  // Object.preventExtensions(target)
+  preventExtensions: ...,
+  // Object.isExtensible(target)
+  isExtensible: ...
+}
