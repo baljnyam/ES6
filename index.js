@@ -1,3 +1,7 @@
+ES6 - Language Specification:
+https://www.ecma-international.org/ecma-262/6.0/ECMA-262.pdf
+
+
 // Arrows and Lexical this
 
 // Expression bodies
@@ -158,3 +162,4 @@ r({
   x: 1,
   y: 2
 }) === 23
+
