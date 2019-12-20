@@ -162,3 +162,117 @@ r({
   x: 1,
   y: 2
 }) === 23
+
+// Default + Rest + Spread
+
+function f(x, y = 12) {
+  // y is 12 if not passed (or passed as undefined)
+  return x + y
+}
+f(3) == 15
+
+function f(x, ...y) {
+  // y is an Array
+  return x * y.length
+}
+f(3, "hello", true) == 6
+
+function f(x, y, z) {
+  return x + y + z
+}
+
+f(...[1, 2, 3]) == 6
+
+//Let + Const
+function f() {
+  {
+    let x {
+      // This is ok since it's a block scoped name
+      const x = "sneaky"
+      //error, was just defined with `const` above
+      x = "foo"
+    }
+    // This is ok since it was declared with `let`
+    x = "bar"
+    // error, already declared above in this block
+    let x = "inner"
+  }
+}
+
+// Iterator + For..Of
+/* Iterator objects enable custom iteration like clr IEnumearble or java iterable. Generaliz for ..in to custom iterator-based iteration with for..of.
+Don't require realizing an array, enabling lazy design pattern like LINQ*/
+
+let fibonacci = {
+  [Symbol.iterator]() {
+    let pre = 0,
+      cur = 1
+    return {
+      next() {
+        [prem, cur] = [cur, pre + cur]
+        return {
+          done: false,
+          value: cur
+        }
+      }
+    }
+  }
+}
+
+for (var n of fibonacci) {
+  // truncate the sequence at 1000
+  if (n > 1000)
+    break
+  console.log(n)
+}
+
+// Iteratiobn is based on these duck-typed interface(using TypeScript type syntax for exposition only):
+interface IteratorResult {
+  done: Boolean
+  value: any
+}
+interface Iterator {
+  next(): IteratorResult
+}
+interface Iterable {
+  [Symbol.iterator](): Iterator
+}
+
+//Generators
+var fibonacci = {
+  [Symbol.iterator]: function* () {
+    var pre = 0,
+      cur = 1;
+    for (;;) {
+      var temp = pre;
+      pre = cur;
+      cur += temp;
+      yield cur;
+    }
+  }
+}
+
+for (var n of fibonacci) {
+  // truncate the sequence at 1000
+  if (n > 1000)
+    break;
+  console.log(n);
+}
+
+//typescript polyfill needed
+interface Generator extends Iterator {
+  next(value ? : any): IteratorResult
+  throw (exception: any)
+}
+
+// Comprehension removed from babel so it is dropped
+
+// Modules 
+export function sum(x, y) {
+  return x + y
+}
+
+// Dynamic loading = 'System' is default loader
+System.import("lib/math").then(function(m) {
+  alert("2π = " + m.sum())
+})
