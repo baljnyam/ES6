@@ -376,3 +376,113 @@ var handler = {
   // Object.isExtensible(target)
   isExtensible: ...
 }
+
+// Symbols
+
+(function () {
+  // module scoped symbol
+  var key = Symbol("key")
+
+  function MyClass(privateData) {
+    this[key] = privateData
+  }
+
+  MyClass.prototype = {
+    doStuff: function () {
+      ...this[key]...
+    }
+  }
+
+  // Limited support from Babel, full support requires
+  // native implementation.
+  typeof key === "symbols"
+})()
+
+var c = new MyClass("hello")
+c["key"] === undefined
+
+//Subclassable Built-ins
+// User code of Array subclass
+class MyArray extends Array {
+  constructor(...args) {
+    super(...args)
+  }
+}
+
+var arr = new MyArray()
+arr[1] = 12
+arr.length == 2
+
+// Math + Number + String + Object APIs
+
+Number.EPSILON
+Number.isInteger(Infinity) // false
+Number.isNaN("NaN") // false
+
+Math.acosh(3)
+Math.hypot(3, 4) // 5
+Math.imul(Math.pow(2, 32) - 1, Math.pow(2, 32) - 2) // 2
+
+"abcde".includes("cd") // true
+"abc".repeat(3) // "abcabcabc"
+
+Array.from(document.querySelectorAll("*")) // Returns a real Array
+Array.of(1, 2, 3) // Similar to new Array(...), but without special one-arg behavior
+[0, 0, 0].fill(7, 1) // [0,7,7]
+[1, 2, 3].findIndex(x => x == 2) // 1
+["a", "b", "c"].entries() // iterator [0, "a"], [1,"b"], [2,"c"]
+["a", "b", "c"].keys() // iterator 0, 1, 2
+["a", "b", "c"].values() // iterator "a", "b", "c"
+
+Object.assign(Point, {
+  origin: new Point(0, 0)
+})
+
+0b111110111 === 503 // true
+0o767 === 503 // true
+
+//Promises
+
+function timeout(duration = 0) {
+  return new Promise((resolve, reject) => {
+    setTimeout(resolve, duration)
+  })
+}
+
+var p = timeout(1000).then(() => {
+  return timeout(2000)
+}).then(() => {
+  throw new Error("hmm")
+}).cat(err => {
+  return Promise.all([timeout(100), timeout(200)])
+})
+
+// Reflect API
+
+var O = {
+  a: 1
+}
+Object.defineProperty(O, 'b', {
+  value: 2
+})
+O[Symbol('c')] = 3
+
+Reflect.ownKeys(O) // ['a', 'b', symbol(c)]
+
+function C(a, b) {
+  this.c = a + b
+}
+
+var instance = Reflect.construct(C, [20, 22])
+instance.c // 42
+
+//Tail calls
+function factorial(n, acc = 1) {
+  "use strict"
+  if (n <= 1) return acc
+  return factorial(n - 1, n * acc)
+}
+
+//Stack overflow in most implementations today,
+//but safe on arbitrary inputs in ES2015
+factorial(100000)
