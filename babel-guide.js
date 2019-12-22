@@ -85,25 +85,25 @@ var obj = {
   ["prop_" + (() => 42)()]: 42
 }
 
-// Template String
-// Basic string literal string creation
-`This is a pretty little template string`
+  // Template String
+  // Basic string literal string creation
+  `This is a pretty little template string`
 
-// Multiline strings
-`In ES5 this 
+  // Multiline strings
+  `In ES5 this 
 is not legal.`
 
 // Intropolate variable bindings
 var name = "Bob",
   time = "today"
-`hello ${name}, how are you ${time}?`
+    `hello ${name}, how are you ${time}?`
 
 // Unescaped template strings
-String.raw `In ES5 "\n" is a line-feed.`
+String.raw`In ES5 "\n" is a line-feed.`
 
 //Construct an HTTP request prefix is used to intrepret the replacements and 
 //construction
-GET `http://foo.org/bar?a=${a}&b=${b}
+GET`http://foo.org/bar?a=${a}&b=${b}
 Content-Type:application/json
 X-Credentials: ${credentials}
 {"foo": ${foo},
@@ -243,7 +243,7 @@ var fibonacci = {
   [Symbol.iterator]: function* () {
     var pre = 0,
       cur = 1;
-    for (;;) {
+    for (; ;) {
       var temp = pre;
       pre = cur;
       cur += temp;
@@ -261,8 +261,8 @@ for (var n of fibonacci) {
 
 //typescript polyfill needed
 interface Generator extends Iterator {
-  next(value ? : any): IteratorResult
-  throw (exception: any)
+  next(value?: any): IteratorResult
+  throw(exception: any)
 }
 
 // Comprehension removed from babel so it is dropped
@@ -377,18 +377,18 @@ var handler = {
   isExtensible: ...
 }
 
-// Symbols
+  // Symbols
 
-(function () {
-  // module scoped symbol
-  var key = Symbol("key")
+  (function () {
+    // module scoped symbol
+    var key = Symbol("key")
 
-  function MyClass(privateData) {
-    this[key] = privateData
-  }
+    function MyClass(privateData) {
+      this[key] = privateData
+    }
 
-  MyClass.prototype = {
-    doStuff: function () {
+    MyClass.prototype = {
+      doStuff: function () {
       ...this[key]...
     }
   }
@@ -396,7 +396,7 @@ var handler = {
   // Limited support from Babel, full support requires
   // native implementation.
   typeof key === "symbols"
-})()
+}) ()
 
 var c = new MyClass("hello")
 c["key"] === undefined
