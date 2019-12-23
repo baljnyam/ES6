@@ -22,6 +22,8 @@ using constructor, this, super and prototype.
 in js - variable can be function function can be prototype.
 inheritence == prototype(this, super)
 */
+
+// Working with objects. Details of the object model
 // Creating hierarchy
 
 // JS
@@ -156,8 +158,113 @@ public class Engineer extends WorkerBee {
 }
 */
 
+function Employee() {
+  this.dept = 'general'
+}
+Employee.prototype.name = ''
+
+function WorkerBee() {
+  this.projects = []
+}
+WorkerBee.prototype = new Employee
+
+var amy = new WorkerBee
+Employee.prototype.name = 'Unknown'
+
+var f = new Foo()
+var isTrue = (f instanceof Foo)
+var chris = new Engineer('Pigman, Chris', ['jsd'], 'fiji')
+
+chris.__proto__ == Engineer.prototype
+chris.__proto__.__proto__ == WorkerBee.prototype
+chris.__proto__.__proto__.__proto__ == Employee.prototype
+chris.__proto__.__proto__.__proto__.__proto__ == Object.prototype
+chris.__proto__.__proto__.__proto__.__proto__.__proto__ == null
+
+function instanceOf(object, constructor) {
+  object = object.__proto__
+  while (object != null) {
+    if (object == construct.prototye)
+      return true
+    if (typeof object == 'xml') {
+      return constructor.prototye == XMLDocument.prototype
+    }
+    object = object.__proto__
+  }
+  return false
+}
+// Global variable
+
+var idCounter = 1
+
+function Employee(name, dept) {
+  this.name = name || ''
+  this.dept = dept || 'general'
+  this.id = idCounter++
+}
+
+var idCounter = 1
+
+function Employee(name, dept) {
+  this.name = name || ''
+  this.dept = dept || 'general'
+  this.id = idCounter++
+}
+
+function Manager(name, dept, reports) {... }
+Manager.prototype = new Employee
+
+function WorkBee(name, dept, projs) {... }
+WorkerBee.prototype = new Employee
+
+function Engineer(name, projs, mach) {... }
+Engineer.prototype = new WorkerBee
+
+function SalesPerson(name, projs, quota) {... }
+SalesPerson.prototype = new WorkerBee
+
+var mac = new Engineer('Wood, Mac')
+
+function Employee(name, dept) {
+  this.name = name || ''
+  this.dept = dept || 'general'
+  if (name)
+    this.id = idCounter++
+}
+
+// No multiple inheritence but there is some trick for it
+
+function Hobbyist(hobby) {
+  this.hobby = hobby || 'scuba'
+}
+
+function Engineer(name, projs, mach, hobby) {
+  this.base1 = WorkerBee
+  this.base1(name, 'engineering', projs)
+  this.base2 = Hobbyist
+  this.base2(hobby)
+  this.machine = mach || ''
+}
+Engineer.prototype = new WorkerBee
+
+var dennis = new Engineer('Doe, Dennis', ['collabra'], 'hugo')
+
+dennis.name == 'Doe, Dennis'
+dennis.dept == 'engineering'
+dennis.projects == ['collabra']
+dennis.machine == 'hugo'
+dennis.hobby == 'scuba'
+
+Hobbyist.prototype.equipment = ['mask', 'fins', 'regulator', 'bcd']
 
 
+// Summary
+/*
+JS is function-property based. class inheritance go through function object prototype from properties
+however multiple inheritance not allowed, or || is possible and useful.
+*/
+
+// DOM https://dom.spec.whatwg.org/#concept-node
 
 
 
