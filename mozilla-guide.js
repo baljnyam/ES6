@@ -357,3 +357,160 @@ function square(something) {} // function declaration
 const square = function (something) {} // function expression
 
 // This means that function hoisting only works with function declarations—not with function expressions.
+
+// Recursion
+// normal
+var x = 0
+while (x < 10) { // "x < 10" is the loop condition
+  x++
+}
+
+function loop(x) {
+  if (x >= 10)
+    return
+  loop(x + 1)
+}
+loop(0)
+
+function multiply(a, b) {
+  b = typeof b !== 'undefined' ? b : 1
+
+  return a * b
+}
+
+multiply(5)
+
+// rest parameter 
+
+function sum(...theArgs) {
+  return theArgs.reduce((previous, current) => {
+    return previous + current;
+  });
+}
+
+console.log(sum(1, 2, 3));
+
+function multiply(multiplier, ...theArgs) {
+  return theArgs.map(x => multiplier * x)
+}
+
+var arr = multiplier(2, 1, 2, 3)
+
+// Arrow function
+// Identifier => Expressions 
+// skip typing function and return
+var a = [
+  'dan',
+  'din',
+  'don',
+  'pan'
+]
+
+var a2 = a.map(function (s) {
+  return s.length
+})
+
+console.log(a2)
+
+var a3 = a.map(s => s.length)
+
+console.log(a3)
+
+//es5
+
+var selected = allJobs.filter(function (job) {
+  return jobs.isSelected()
+})
+//es6
+var selected = allJobs.filter(jobs => jobs.isSelected())
+
+//es5
+var total = values.reduce(function (a, b) {
+  return a + b
+}, 0)
+//es6
+var total = values.reduce((a, b) => a + b, 0)
+
+//es5
+$("#confetti-btn").click(function (event) {
+  playTrumpet();
+  fireConfettiCannon();
+});
+//es6
+$("#confetti-btn").click(event => {
+  playTrumpet();
+  fireConfettiCannon();
+});
+
+//es6
+var chewToys = puppies.map(puppy => {}); // BUG!
+var chewToys = puppies.map(puppy => ({})); // ok
+
+// ES6
+{
+  addAll: function addAll(pieces) {
+    _.each(pieces, piece => this.add(piece));
+  }
+
+}
+
+// ES6 with method syntax
+{
+  addAll(pieces) {
+    _.each(pieces, piece => this.add(piece));
+  }
+}
+
+//No seperate this
+//es5
+function Person() {
+  // The Person() constructor defines `this` as itself.
+  this.age = 0;
+
+  setInterval(function growUp() {
+    // In nonstrict mode, the growUp() function defines `this` 
+    // as the global object, which is different from the `this`
+    // defined by the Person() constructor.
+    this.age++;
+  }, 1000);
+}
+
+var p = new Person();
+
+//es6
+function Person() {
+  this.age = 0
+
+  setInterval(() => {
+    this.age++
+  }, 1000)
+}
+
+var p = new Person()
+
+// eval
+
+console.log(eval('2 + 2'))
+// expected output: 4
+
+console.log(eval(new String('2 + 2')))
+//expected output: 2 + 2
+
+console.log(eval('2 + 2') === eval('4'))
+// true
+
+console.log(eval('2 + 2') === eval(new String('2 + 2')))
+// false
+
+function div(x) {
+  if (isFinite(1000 / x)) {
+    return 'Number is NOT Infinity.';
+  }
+  return "Number is Infinity!";
+}
+
+console.log(div(0));
+// expected output: "Number is Infinity!""
+
+console.log(div(1));
+// expected output: "Number is NOT Infinity."
