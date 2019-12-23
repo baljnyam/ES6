@@ -264,7 +264,8 @@ JS is function-property based. class inheritance go through function object prot
 however multiple inheritance not allowed, or || is possible and useful.
 */
 
-// DOM https://dom.spec.whatwg.org/#concept-node
+// 
+
 
 
 
