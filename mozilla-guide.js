@@ -211,16 +211,24 @@ function Employee(name, dept) {
   this.id = idCounter++
 }
 
-function Manager(name, dept, reports) {... }
+function Manager(name, dept, reports) {
+  ...
+}
 Manager.prototype = new Employee
 
-function WorkBee(name, dept, projs) {... }
+function WorkBee(name, dept, projs) {
+  ...
+}
 WorkerBee.prototype = new Employee
 
-function Engineer(name, projs, mach) {... }
+function Engineer(name, projs, mach) {
+  ...
+}
 Engineer.prototype = new WorkerBee
 
-function SalesPerson(name, projs, quota) {... }
+function SalesPerson(name, projs, quota) {
+  ...
+}
 SalesPerson.prototype = new WorkerBee
 
 var mac = new Engineer('Wood, Mac')
@@ -264,9 +272,88 @@ JS is function-property based. class inheritance go through function object prot
 however multiple inheritance not allowed, or || is possible and useful.
 */
 
-// 
+// Hoisting
+//
+//variable
+console.log(x === undefined) //true
+var x = 3
 
+var myvar = 'my value'
 
+(function () {
+  console.log(myvar) // undefined
+  var myvar = 'local value'
+})
+// function
 
+foo()
 
+function foo() {
+  console.log('bar')
+}
 
+baz()
+
+var baz = function () {
+  console.log('baz2')
+}
+
+// null is not NULL it is non existing meaning
+// dynamic auto conversions possible
+
+// js Does not convert numeric to string
+
+'37' - 7 // 30
+  '37' + 7 // 
+
+// Basic string literals
+`in javaScript '\n' is a line-feed`
+
+// Multiline strings
+`in JavaScript, template strings can run over
+multiple lines, but double and single quoted strings
+cannot`
+
+// String interpolation
+var name = 'Bob',
+  time = 'today'
+`Hello ${name}, how are you ${time}`
+
+// Construct an HTTP request prefix used to interpret the
+// replacements and construction
+
+POST `http://foo.or/bar?a=${a}&b=${b}
+      Content-Type: application/json
+      X-Credentials: ${credentials}
+      {"foo": ${foo},
+        "bar": ${bar}}`(myOnReadyStateChangeHandler)
+
+// try catch
+function getmonthName(mo) {
+  mo = mo - 1 // adjust month number for array index (1 = Jan, 12 Dec)
+
+  let months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+    'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
+  ]
+
+  if (months[mo]) {
+    return months[mo]
+  } else {
+    throw 'InvalidMonthNo' // Throw keywords is used here
+  }
+}
+
+try { // statements to tr
+  monthName = getmonthName(myMonth)
+
+} catch (e) {
+  monthName = 'unknown'
+  logMyErrors(e) // pass exception object to error handler -> your own function
+}
+
+// function
+
+function square(something) {} // function declaration
+const square = function (something) {} // function expression
+
+// This means that function hoisting only works with function declarations—not with function expressions.
