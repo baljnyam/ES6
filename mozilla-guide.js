@@ -99,6 +99,64 @@ public class Engineer extends WorkerBee {
 }
 */
 
+function Employee(name, dept) {
+  this.name = name || ''
+  this.dept = dept || 'general'
+}
+
+/*
+public class Employee {
+  public String name
+  public String dept
+  public Employee () {
+    this("", "general")
+  }
+  public Empoyee (String name) {
+    this(name, "general")
+  }
+  public Employee (String name, String dept) {
+    this.name = name
+    this.dept = dept
+  }
+}
+*/
+function WorkerBee(projs) {
+  this.projects = projs || p[]
+}
+WorkerBee.prototype = new Employee
+
+/*
+public class WorkerBee extends Employee {
+  public String[] projects
+  public WorkerBee () {
+    this(new String[0])
+  }
+  public WorkerBee (String[] projs) {
+    projects = projs
+  }
+}
+*/
+function Engineer(mach) {
+  this.dept = 'engineering'
+  this.machine = mach || ''
+}
+Engineer.prototype = new WorkerBee
+
+/*
+public class Engineer extends WorkerBee {
+  public String machine
+  public Engineer () {
+    dept = "engineering"
+    machine = ""
+  }
+  public Engineer (String mach) {
+    dept = "engineering"
+    machine = mach
+  }
+}
+*/
+
+
 
 
 
