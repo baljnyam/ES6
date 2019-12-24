@@ -514,3 +514,97 @@ console.log(div(0));
 
 console.log(div(1));
 // expected output: "Number is NOT Infinity."
+
+var trees = ['redwood', 'bay', 'cedar', 'oak', 'maple'];
+0 in trees; // true
+3 in trees; // true
+6 in trees; // false
+
+var myString = new String('coral');
+'length' in myString; // true
+
+//objects
+var mycar = {
+  make: 'Honda',
+  model: 'Accord',
+  year: 1998
+};
+'make' in mycar; // true
+'model' in mycar; // true
+
+// spread
+
+var parts = ['shoulders', 'knees'];
+var lyrics = ['head', ...parts, 'and', 'toes'];
+
+// Regular expressions
+
+// Assertion
+
+lineLong = `tey, ihe light-greon apple
+tangs on ihe greon traa`
+
+lineLong = lineLong.replace(/^t/gim, 'h') //fix 'tey', 'tangs' => 'hey', 'hangs'. Avoid 'traa'.
+
+lineLong = lineLong.replace(/aa$/gim, 'ee.') // fix  'traa' => 'tree'.
+
+lineLong = lineLong.replace(/\bi/gim, 't') // fix  'ihe' but does not touch 'light'.
+
+lineLong = lineLong.replace(/\Bo/gim, 'e') // fix  'greon' but does not touch 'on'.
+
+let fruits = ["Apple", "Watermelon", "Orange", "Avocado", "Strawberry"];
+
+let fruitsStartsWithA = fruits.filter(fruit => /^A/.test(fruit))
+let fruitsStartsWithNotA = fruits.filter(fruit => /^[^A]/.test(fruit));
+let enEdSelection = fruitsWithDescription.filter(descr => /(en|ed)\b/.test(descr));
+let regex = /First(?= test)/g;
+console.log('First test'.match(regex)); // [ 'First' ]
+console.log('First peach'.match(regex)); // null
+console.log('This is a First test in a year.'.match(regex)); // [ 'First' ]
+console.log('This is a First peach in a month.'.match(regex)); // null
+let orangeNotLemon = "Do you want to have an orange? Yes, I do not want to have a lemon!";
+let selectNotLemonRegex = /[^?!]+have(?! a lemon)[^?!]+[?!]/gi // ["Do you want to have an orange?"] 
+
+// Group and Ranges
+var aliceExcerpt = "There was a long silence after this, and Alice could only hear whispers now and then.";
+var regexpVowels = /[aeiouy]/g; // Number of vowels: 25
+
+let personList = `First_Name: John, Last_Name: Doe
+First_Name: Jane, Last_Name: Smith`;
+
+let regexpNames = /First_Name: (\w+), Last_Name: (\w+)/mg;
+let match = regexpNames.exec(personList);
+do {
+  console.log(`Hello ${match[1]} ${match[2]}`);
+} while ((match = regexpNames.exec(personList)) !== null); // 
+// Character classes
+var aliceExcerpt = "I’m sure I’m not Ada,’ she said, ‘for her hair goes in such long ringlets, and mine doesn’t go in ringlets at all.";
+var regexpWordStartingWithA = /\b[aA]\w+/g
+console.table(aliceExcerpt.match(regexpWordStartingWithA)); // ['Ada', 'and', 'at', 'all']
+
+var aliceExcerpt = "There was a long silence after this, and Alice could only hear whispers now and then.";
+var regexpVowels = /[aeiouy]/g;
+
+console.log("Number of vowels:", aliceExcerpt.match(regexpVowels).length);
+// Number of vowels: 25
+
+//exec
+
+var matches = /(hello \S+)/.exec('This is a hello world!');
+console.log(matches[1]);
+
+//test
+var str = 'table football';
+
+var regex = RegExp('foo*');
+var globalRegex = RegExp('foo*', 'g');
+
+console.log(regex.test(str)); // expected output: true
+
+//matchAll
+let regexp = /t(e)(st(\d?))/g;
+let str = 'test1test2';
+
+let array = [...str.matchAll(regexp)];
+
+console.log(array[0]); // Array ["test1", "e", "st1", "1"]
