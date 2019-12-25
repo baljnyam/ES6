@@ -624,3 +624,32 @@ var arr = [element, element1, ..., elementN]
 var cats = [];
 cats[30] = ['Dusty'];
 console.log(cats.length); // 31
+
+// iterating
+
+var colors = ['red', 'green', 'blue']
+colors.forEach(function (color) {
+  console.log(color)
+})
+
+var colors = ['red', 'green', 'blue']
+colors.forEach(color => console.log(color))
+
+// slice(start_index, upto_index)
+
+var myArray = new Array('a', 'b', 'c', 'd', 'e')
+myArray = myArray.slice(1, 4) // starts at index 1 and extracts all elements
+// until index 3, returning ["b","c","d"]
+
+var myArray = new Array('1', '2', '3', '4', '5')
+myArray.splice(1, 3, 'a', 'b', 'c', 'd')
+//["1", "a", "b", "c", "d", "5"] //["2", "3", "4"]
+var saying = new Map()
+sayings.set('dog', 'woof')
+saying.set('cat', 'meow')
+saying.set('elephant', 'toot')
+saying.size
+saying.get('fox') // undefined
+saying.has('bird') // false
+saying.delete('dog')
+saying.has('dog') // false
