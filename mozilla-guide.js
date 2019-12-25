@@ -608,3 +608,19 @@ let str = 'test1test2';
 let array = [...str.matchAll(regexp)];
 
 console.log(array[0]); // Array ["test1", "e", "st1", "1"]
+
+// Array indexed collections
+
+// Array
+
+// Creating array object
+
+var arr = new Array(element, element1, ..., elementN)
+var arr = Array(element, element1, ..., elementN)
+var arr = [element, element1, ..., elementN]
+
+// length - length property is special; it always returns the index of the last element plus one
+
+var cats = [];
+cats[30] = ['Dusty'];
+console.log(cats.length); // 31
