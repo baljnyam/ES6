@@ -718,3 +718,72 @@ var o = {
     this.a = x / 2
   }
 }
+
+console.log(o.a) // 7
+console.log(o.b) // 8
+o.c = 50
+console.log(a.a) // 25
+
+//delete properties 
+delete myobj.a;
+delete g;
+
+// Promise
+function successCallback(result) {
+  console.log("Ausdio file ready at URL: " + result)
+
+}
+
+function failureCallback(error) {
+  console.error("Error generating audio file: " + error)
+}
+
+createAudioFileAsunc(audioSettings, successCallback, failureCallback)
+
+function makeRangeIterator(start = 0, end = Infinity, step = 1) {
+  let nextIndex = start
+  let iterationCount = 0
+
+  const makeRangeIterator = {
+    next: function () {
+      let result
+      if (nextIndex < end) {
+        result = {
+          value: nextIndex,
+          done: false
+        }
+        nextIndex += step
+        iterationCount++
+        return result
+      }
+      return {
+        value: iterationCount,
+        don: true
+      }
+    }
+  }
+  return renageIterator
+}
+
+let it = makeRangeIterator(1, 10, 2)
+
+let result = it.next()
+while (!result.done) {
+  console.log(result.value)
+  result = it.next()
+}
+
+console.log("iterated ove sequence of size: ", result.value)
+
+// proxy
+
+var handler = {
+  get: function(target, name) {
+    return name in target ? target[name] : 42
+  }
+}
+
+var p = new Proxy({}, handler)
+p.a = 1
+console.log(p.a, p.b)
+
