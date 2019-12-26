@@ -653,3 +653,68 @@ saying.get('fox') // undefined
 saying.has('bird') // false
 saying.delete('dog')
 saying.has('dog') // false
+
+// Objects
+
+objectName.propertyName // access the properties of an object with a simple dot-notation
+
+var myCar = new Object()
+myCar.make = 'Ford'
+myCar.model = 'Mustang'
+myCare.year = 1969
+
+myCar.color // unassigned properties undefined(and not null)
+myCar['make'] = 'Ford' // bracket notation - access
+myCar['modle'] = 'Mustang'
+myCar['year'] = 1969
+
+// four variables are created and assigned in a single go
+// separated by commas
+var myobj = new Object(),
+  str = 'myString',
+  tand = Math.random(),
+  obj = new Object()
+
+// String or symbol property name
+var propertyName = 'make'
+myCar[propertyName] = 'Ford'
+
+propertyName = 'model'
+myCar[propertyName] = 'Mustang'
+
+// for....in
+function showProps(obj, objName) {
+  var result = ``
+  for (var i in obj) {
+    // obj.hasOwnProperty() is used to filter out properties from the
+    // object's prototype chain
+    if (obj.hasOwnProperty(i)) {
+      result += `${objName}.${i} = ${obj[i]}\n`
+    }
+  }
+}
+
+console.log(Object.keys(object));
+console.log(Object.getOwnPropertyNames(object1));
+
+// Constructor function
+
+function Car(make, model, year) {
+  this.make = make
+  this.model = model
+  this.year = year
+}
+
+var mycare = new Car('Eagle', 'Talon TSi', 1993)
+
+// object init
+
+var o = {
+  a: 7,
+  get b() {
+    return this.a + 1
+  },
+  set c(x) {
+    this.a = x / 2
+  }
+}
