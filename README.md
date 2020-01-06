@@ -56,7 +56,7 @@ Try Mozilla guide
 input: mozilla
 </p>
 <ul>
-<li>Intorduction</li>
+<li>Introduction</li>
 <li>Grammer & Type</li>
 <li>Control flow and error handling</li>
 <li>Loops and iteration</li>
